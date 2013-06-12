@@ -3,11 +3,11 @@
 angular.module('amIInTimeForTheTrainApp', [])
   .config(function ($routeProvider) {
     $routeProvider
-      .when('/', {
-        templateUrl: 'views/main.html',
-        controller: 'MainCtrl'
+      .when('/choose-station', {
+        templateUrl: 'views/choose-station.html',
+        controller: 'ChooseStationCtrl'
       })
       .otherwise({
-        redirectTo: '/'
+        redirectTo: '/choose-station'
       });
   });
