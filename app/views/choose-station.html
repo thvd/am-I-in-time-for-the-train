@@ -1,6 +1,15 @@
 
 
-<h1> Choose a station in the near </h1>
+<h1> Choose a station in the nearby </h1>
 
 
 <p> {{ location }} </p>
+
+
+<label>
+    Alle dichtbij zijnde stations:
+    <!-- station -->
+    <select ng-model="chosenStation" ng-options="station.name for station in nearbyStations"></select>
+</label>
+
+<select ng-model="chosenTransportType" ng-options="type.name for type in transportTypeOptions"></select>

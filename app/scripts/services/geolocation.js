@@ -5,49 +5,54 @@
  */
 
 angular.module('amIInTimeForTheTrainApp')
-    .factory('GeoService', ['$q', '$rootScope', '$timeout', function ($q, $rootScope, $timeout) {
+    .factory('GeoService', function ($q, $rootScope, $timeout, $log) {
         return {
             getCurrentLocation: function () {
-                var d = $q.defer();
+                var deferred = $q.defer();
+
+                var TAG = '[amIInTimeForTheTrainApp.GeoService.getCurrentLocation(' + arguments + ')]';
 
                 if (!navigator.geolocation) {
-                    d.reject('location services not allowed');
+                    $log.error(TAG, 'navigation.geolocation is not enabled.');
+                    deferred.reject('location services not allowed');
                     return d.promise;
                 }
 
-//                $timeout(function () {
-                    navigator.geolocation.getCurrentPosition(function (position) {
-                        debugger;
-//                        $rootScope.$apply(function () {
-//                            $rootScope.$broadcast("locationChanged", {
-//                                coordinates: coords
-//                            });
-//
-//                            d.resolve(position);
-//
-//                        });
-
-                        d.resolve(position);
-
-                    }, function (error) {
-                        debugger;
-                        d.reject(error);
+                navigator.geolocation.getCurrentPosition(function (position) {
+                    $rootScope.$apply(function() {
+                        deferred.resolve(position);
                     });
-//                }, 1000);
+                    $log.info(TAG, 'Position update-success:', arguments);
+                    //debugger;
 
-                return d.promise;
-            },
+                }, function (error) {
+                    $rootScope.$apply(function() {
+                        deferred.reject(error);
+                    });
+                    $log.error(TAG, 'Position update-error:', arguments);
+                    debugger;
+                });
+
+                $log.info(TAG, 'return promise:', deferred.promise);
+
+                return deferred.promise;
+            }/*,
             watchLocation: function () {
 
+                var TAG = '[amIInTimeForTheTrainApp.GeoService.watchLocation(' + arguments + ')]';
+
                 if (!navigator.geolocation) {
+                    $log.error(TAG, 'navigation.geolocation is not enabled.');
                     return;
                 }
 
                 navigator.geolocation.watchPosition(function (position) {
+                    $log.info(TAG, 'Position update-success:', arguments);
                     $rootScope.$broadcast("onLocationChanged", position);
                 }, function (error) {
+                    $log.error(TAG, 'Position update-error:', arguments);
                     debugger;
                 });
-            }
+            }*/
         };
-    }]);
+    });
