@@ -1,15 +1,47 @@
+<div class="navbar navbar-fixed-top">
+    <div class="navbar-inner">
+        <a class="brand" href="#"> Am I in time for the public transit? </a>
+        <ul class="nav">
+
+        </ul>
+    </div>
+</div>
 
 
-<h1> Choose a station in the nearby </h1>
 
+<nav>
 
-<p> {{ location }} </p>
+    <select ng-model="chosenTransportType" ng-options="type.name for type in transportTypeOptions" class="input-large"></select>
 
+    <ul class="nav nav-tabs nav-stacked">
+        <li ng-repeat=" station in nearbyStations | unique: 'name' | filter: matchTypeOfTransport | take: 5 " ng-click="onClickStation(station)"
+            ng-class=" { active : chosenStation == station } " class="station-item">
 
-<label>
-    Alle dichtbij zijnde stations:
-    <!-- station -->
-    <select ng-model="chosenStation" ng-options="station.name for station in nearbyStations"></select>
-</label>
+            <a>
+                <i class="icon-suitcase"></i>
+                {{ station.types[0].split('_')[0] }} - {{ station.name }}
+            </a>
+        </li>
+    </ul>
+</nav>
 
-<select ng-model="chosenTransportType" ng-options="type.name for type in transportTypeOptions"></select>
+<!--<a class="btn" ng-href="#/station-distance/{{ chosenStation.reference }}"> Go! </a>-->
+
+<dl>
+
+    <dt> Distance to station: </dt>
+    <dd> {{ distance.distance.text }} </dd>
+
+    <dt> Time walking to station: </dt>
+    <dd> {{ distance.duration.text }} </dd>
+
+    <dt> Current walking speed: </dt>
+    <dd> {{ currentPosition.coords.speed }} </dd>
+
+    <dt> Arrival time, with current speed: </dt>
+    <dd> {{ distance.distance.value / currentPosition.coords.speed }} </dd>
+
+    <dt> Is watchLocation enabled: </dt>
+    <dd> {{ isWatchLocationEnabled }} </dd>
+
+</dl>

@@ -27,12 +27,14 @@
     <!-- Add your site or application content here -->
     <div class="container" ng-view></div>
 
-    <script src="https://maps.googleapis.com/maps/api/js?sensor=false&libraries=places&v=3.exp&key=AIzaSyDZUCIs0fgg3L6OVz4vTD8nhsowN0YhupE"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?sensor=false&libraries=places&v=3.exp&key=AIzaSyDZUCIs0fgg3L6OVz4vTD8nhsowN0YhupE&language=EN&region=NL"></script>
 
     <script src="components/angular/angular.js"></script>
     <script src="components/angular-resource/angular-resource.js"></script>
     <script src="components/angular-cookies/angular-cookies.js"></script>
     <script src="components/angular-sanitize/angular-sanitize.js"></script>
+    <script src="components/angular-translate/angular-translate.js"></script>
+    <!--<script src="components/angular-ui/build/angular-ui.js"></script>-->
 
     <!-- build:js scripts/scripts.js -->
     <script src="scripts/app.js"></script>
@@ -40,14 +42,17 @@
     <script src="scripts/services/geolocation.js"></script>
     <script src="scripts/controllers/ChooseStation.js"></script>
     <script src="scripts/services/GoogleMapsService.js"></script>
+    <script src="scripts/filters/unique.js"></script>
+    <script src="scripts/controllers/StationDistance.js"></script>
+    <script src="scripts/filters/take.js"></script>
     <!-- endbuild -->
 
     <!-- Google Analytics: change UA-XXXXX-X to be your site's ID. -->
     <script>
-      var _gaq=[['_setAccount','UA-XXXXX-X'],['_trackPageview']];
+      /*var _gaq=[['_setAccount','UA-XXXXX-X'],['_trackPageview']];
       (function(d,t){var g=d.createElement(t),s=d.getElementsByTagName(t)[0];
       g.src=('https:'==location.protocol?'//ssl':'//www')+'.google-analytics.com/ga.js';
-      s.parentNode.insertBefore(g,s)}(document,'script'));
+      s.parentNode.insertBefore(g,s)}(document,'script'));*/
     </script>
   </body>
 </html>
